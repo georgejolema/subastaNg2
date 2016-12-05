@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-md-5">
+        <form role="form">
+            <h3>Address</h3>
+            <div class="form-group">
+                <input type="text" class="form-control" name="alias" [(ngModel)]="address.name" placeholder="Alias"/>            
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="address1" [(ngModel)]="address.address" placeholder="Address detail"/>
+            </div>
+        
+            <div class="form-group">
+                <input type="text" class="form-control" name="zip" [(ngModel)]="address.zipCode" placeholder="Zip"/>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="phone" [(ngModel)]="address.phoneNumber" placeholder="Phone"/>
+            </div>
+            <button type="button" class="btn btn-danger" (click)="remove()">Remove</button>
+        </form>
+    </div>
+</div>
