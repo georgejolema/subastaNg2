@@ -6,8 +6,8 @@ var express = require('express'),
     Token = require('../model/token'),
     uuid = require("uuid-lib"),
     userRouter = express.Router(),
-    bcrypt = require('bcrypt-nodejs');
-
+    bcrypt = require('bcrypt-nodejs'),
+    events = require('events');
 
 userRouter.route('/login').post(passport.authenticate('local'), login);
 userRouter.route('/logout').get(logout);
@@ -21,7 +21,7 @@ userRouter.route('/profile')
 userRouter.route('/register').post(register);
 userRouter.route('/update').post(isAuthenticated(), update);
 userRouter.route('/reload').post(isAuthenticated(), reload);
-
+userRouter.route('/validatepassword').post(isAuthenticated(), validatePassWord);
 
 function isAuthenticated(){
     return passport.authenticate('bearer', { session: false });
@@ -71,13 +71,10 @@ function update(req, res){
     var user=req.body.user;       
     var password = req.body.password;
     if(password != null && password != '') 
-        bcrypt.genSalt(5, function(err, salt){
-                if(err)return fn(err);
-                bcrypt.hash(password, salt, null, function(err, hash){                    
-                    user.password=hash;
-                    sendResponse(res, userModel, user);
-                });
-        });
+       hashPassword(password, function(hash){
+           user.password = hash;
+            sendResponse(res, userModel, user);
+       })
     else    
         sendResponse(res, userModel, user);    
     function sendResponse(res, userModel, user){
@@ -89,7 +86,7 @@ function update(req, res){
     }
 }
 function reload(req, res){
-    var userName = req.body.userName
+    var userName = req.body.userName;
     userModel.findOne({userName:userName}, function(err, user){
         if (err) { res.send(err); }
         if (!user) { res.send('User not found'); }
@@ -97,6 +94,24 @@ function reload(req, res){
     });
 }
 
-
+function validatePassWord(req, res){
+    var userName=req.body.userName;
+    var password=req.body.password;
+    hashPassword(password, function(hash){
+        userModel.findONe({userName:userName, password:hash}, function(err, user){
+            if (err) { res.send(err); }
+            if (!user) { res.send('invalid user'); }
+            res.json(user); 
+        });
+    });
+}
+function hashPassword(password, callBack){
+     bcrypt.genSalt(5, function(err, salt){
+        if(err)throw "Invalid hash operation";
+        bcrypt.hash(password, salt, null, function(err, hash){            
+            callBack(hash);        
+        });
+    });
+}
 
 module.exports = userRouter;
