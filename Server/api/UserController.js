@@ -8,7 +8,6 @@ var express = require('express'),
     userRouter = express.Router(),
     bcrypt = require('bcrypt-nodejs'),
     events = require('events');
-
 userRouter.route('/login').post(passport.authenticate('local'), login);
 userRouter.route('/logout').get(logout);
 userRouter.route('/profile')
@@ -93,16 +92,20 @@ function reload(req, res){
         res.json(user);           
     });
 }
-
 function validatePassWord(req, res){
     var userName=req.body.userName;
     var password=req.body.password;
-    hashPassword(password, function(hash){
-        userModel.findONe({userName:userName, password:hash}, function(err, user){
-            if (err) { res.send(err); }
-            if (!user) { res.send('invalid user'); }
-            res.json(user); 
-        });
+    userModel.findOne({userName:userName}, function(err, user){
+        if (err) 
+            res.send(err); 
+        user.verifyPassword(password, function(err, isMatch) {
+            if (err) 
+                res.status(500).send('Server error');             
+            if (!isMatch) 
+                res.status(417).send('invalid user'); 
+            else
+                res.json(user);            
+        });           
     });
 }
 function hashPassword(password, callBack){
@@ -113,5 +116,4 @@ function hashPassword(password, callBack){
         });
     });
 }
-
 module.exports = userRouter;

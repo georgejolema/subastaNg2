@@ -39,6 +39,10 @@ export class UserService {
         return this.postUser({user:user, password:password},'update');
     }
 
+    validatePassword(userName:string, password:string){
+        return this.postUser({userName:userName, password:password},"validatepassword");
+    }
+
     testAPI(){
         return this.http.get(this.url + '/register'+this.TokenUrl)
                .toPromise()

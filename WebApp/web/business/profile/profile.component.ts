@@ -38,8 +38,20 @@ export class ProfileComponent  implements OnInit{
         this.notification.errorMessage(message);
     }
     save(){
-        if(this.userForm.validateForm() && (!this.changePassword || this.passwordForm.validatePassword()))
-            this.apiUser.update(this.user, this.changePassword ? this.passwordForm.password : '').then(x=>{
+        
+        if(this.userForm.validateForm() && (!this.changePassword || this.passwordForm.validatePassword())){
+            if(this.changePassword){
+                this.apiUser.validatePassword(this.user.userName, this.passwordForm.previousPassword)
+                    .then(x=>this.updateUser())
+                    .catch(x=>this.notification.errorMessage("Previous password is invalid"));
+            }
+            else
+                this.updateUser();
+        }
+    }
+
+    private updateUser(){
+        this.apiUser.update(this.user, this.changePassword ? this.passwordForm.password : '').then(x=>{
                     this.apiAccount.setUsersToCookies(x);
                     this.notification.notify('User profile modified successfully');
                 }).catch(x=>this.notification.errorMessage('Unable to edit the user profile at the moment'));
