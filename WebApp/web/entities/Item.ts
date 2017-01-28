@@ -6,6 +6,7 @@ export class Item{
     expiration:IDatepickerData;
     category:Array<string>
     status:number;
+    brand:string;
     images:Array<Image>;
     constructor(){
         this.images=[];
