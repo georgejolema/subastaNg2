@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AccountService} from '../../services/account.service';
 import {Item} from '../../entities/Item';
+import {IBlob} from '../../common/upload.component';
 
 @Component({
     selector:'items',
@@ -13,6 +14,9 @@ export class ItemsComponent implements OnInit{
         if(this.apiAccount.validateUser()){
             this.item=new Item();
         }
+    }
+    onChunkLoaded(blob: IBlob){
+
     }
 
 

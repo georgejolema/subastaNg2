@@ -11,8 +11,25 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 };
 @Component({
     selector:'datepicker',
-    templateUrl:'common/datepicker.html',
-    styleUrls: ['common/datepicker.css'],
+    template:`
+    <div class="input-group">
+        <input type="text" class="form-control" [(ngModel)]="value" [maxDate]="maxDate" [minDate]="minDate" ngbDatepicker #d="ngbDatepicker" [ngModelOptions]="{standalone: true}" placeholder="{{placeholder}}"/>
+        <span class="input-group-addon" (click)="d.toggle()" >                                   
+            <li class="fa fa-calendar"></li>
+        </span>
+    </div>
+    `,
+    
+    styles: [
+        `
+        .input-group{
+            display: table;
+        }
+
+        .input-group .input-group-addon li{
+            cursor:pointer;
+        }
+        `    ],
     providers:[CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
 })
 export class DatepickerComponent implements ControlValueAccessor {

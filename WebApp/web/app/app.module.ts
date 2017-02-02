@@ -22,6 +22,7 @@ import {UserService} from '../services/user.service';
 import {AccountService} from '../services/account.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import {UploadComponent, UploadFileDirective} from '../common/upload.component';
 @NgModule({
   imports:      [  BrowserModule,
     FormsModule,
@@ -29,7 +30,8 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
     routing,
     NgbModule.forRoot() ],
   declarations: [ AppComponent, HomeComponent, RegisterComponent, AddAddressComponent, ProfileComponent,
-                  SearchComponent, LoginComponent, DatepickerComponent, ItemsComponent, CartComponent, BasicUserFormComponent, ChangePasswordComponent ],
+                  SearchComponent, LoginComponent, DatepickerComponent, ItemsComponent, CartComponent, 
+                  BasicUserFormComponent, ChangePasswordComponent, UploadComponent, UploadFileDirective ],
   bootstrap:    [ AppComponent ],
 
   providers: [UserService, CookieService, AccountService, NotificationService ]
