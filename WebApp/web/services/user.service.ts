@@ -2,12 +2,13 @@ import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {User, UserData} from '../entities/User';
+import {BasicService} from './basicService';
 @Injectable()
-export class UserService {
+export class UserService extends BasicService{
     private url: string = 'api/user';
     public user:User;
     public token:string="none";
-    constructor(private http: Http) { }
+    constructor(private http: Http) {super(); }
 
     login(userName:string, password:string):Promise<UserData>{
         return this.post({userName:userName, password:password}, 'login');
@@ -82,13 +83,6 @@ export class UserService {
             .toPromise()
             .then(res => res.json())
             .catch(this.handleError);
-    }
-
-
-
-    private handleError(error: any) {
-        console.error('An error occurred', error);
-        return Promise.reject(error.message || error);
     }
 
     private get TokenUrl(){

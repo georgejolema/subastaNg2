@@ -5,6 +5,7 @@ var itemSchema = new Schema({
     name:String,
     description:String,
     price: Number,
+    brand:String,
     expiration:{year:Number, month:Number, day:Number},
     category: [String],
     status: Number,

@@ -1,9 +1,9 @@
-<form class="navbar-form navbar-right">
+<form class="form-inline my-2 my-lg-0">
     <div *ngIf="!user">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="User Name" [(ngModel)]="name" name="name"/>
-            <input type="password" class="form-control" placeholder="Password" [(ngModel)]="password" name="password"/>
-        </div>
+        
+            <input type="text" class="form-control mr-sm-2" placeholder="User Name" [(ngModel)]="name" name="name"/>
+            <input type="password" class="form-control mr-sm-2" placeholder="Password" [(ngModel)]="password" name="password"/>
+
         <button class="btn btn-default" (click)="Login()">Login</button>
     </div>  
     <div *ngIf="user">

@@ -12,29 +12,26 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "v4.0.0-alpha.5",
-    "font-awesome": "fontawesome#^4.7.0",
-    "normalize-strings": "normalize#^1.1.0",
-    "normalize-css": "^5.0.0"
+    "bootstrap": "v4.0.0-alpha.6",
+    "font-awesome": "fontawesome#^4.7.0"
   },
   "overrides": {
     "bootstrap": {
       "main": [
         "dist/js/bootstrap.js",
-        "dist/css/bootstrap.css",
-        "dist/css/bootstrap-flex.css",
+        "dist/css/bootstrap.min.css",
         "dist/css/bootstrap-grid.css",
         "dist/css/bootstrap-reboot.css"
+      ]
+    },
+   "tether":{
+      "main":[
+        "dist/js/tether.js"
       ]
     },
     "font-awesome": {
       "main": [
         "css/font-awesome.css"
-      ]
-    },
-    "normalize-css":{
-      "main":[
-        "normalize.css"
       ]
     }
   }

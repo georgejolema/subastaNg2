@@ -7,9 +7,14 @@ import {Component, OnInit, Directive, Input, Output, ViewChildren, QueryList, Ev
      <div>
         <input type="file" multiple (change)="OnChange($event.target.files)"/>        
         <upload-simple-file  #ups *ngFor="let file of loadedFiles" [selectedFile]="file" (onChunkLoaded)="loadChunk($event)"></upload-simple-file>
-        <button class="btn btn-success" (click)="uploadFiles()">Upload</button>
+        <button class="btn btn-default" (click)="uploadFiles()">Upload</button>
      <div>
-    `
+    `,
+    styles:[`
+        button{
+            margin-top:5px;
+        }
+    `]
 })
 export class UploadComponent implements OnInit {
     @Output() onChunkLoaded=new EventEmitter();
@@ -44,11 +49,8 @@ export class UploadComponent implements OnInit {
     template:`
     <div class="row">
         <div class="col-md-12"><label>{{selectedFile.name}}</label></div>
-        <div class="col-md-12"><div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': progressFileUploaded+'%'}">
-                    {{progressFileUploaded}}%
-                </div>
-            </div>
+        <div class="col-md-12">
+            <ngb-progressbar type="success" [value]="progressFileUploaded">{{progressFileUploaded}}%</ngb-progressbar>
         </div>
     </div>
     `

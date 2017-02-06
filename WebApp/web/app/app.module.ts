@@ -20,6 +20,7 @@ import {NotificationService} from '../services/notification.service';
 import { routing} from './app.routes';
 import {UserService} from '../services/user.service';
 import {AccountService} from '../services/account.service';
+import {ItemService} from '../services/items.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import {UploadComponent, UploadFileDirective} from '../common/upload.component';
@@ -34,6 +35,6 @@ import {UploadComponent, UploadFileDirective} from '../common/upload.component';
                   BasicUserFormComponent, ChangePasswordComponent, UploadComponent, UploadFileDirective ],
   bootstrap:    [ AppComponent ],
 
-  providers: [UserService, CookieService, AccountService, NotificationService ]
+  providers: [UserService, CookieService, AccountService, NotificationService, ItemService ]
 })
 export class AppModule { }
