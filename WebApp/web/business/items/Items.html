@@ -1,38 +1,6 @@
 
-<ngb-tabset type="pills">
-    <ngb-tab title="New items">
-        <template ngbTabContent>
-            <div class="row">
-                <div class="col-md-4">
-                    <form role="form">
-                        <div class="form-group">                            
-                            <label>Name</label>
-                            <input type="text" class="form-control" name="Name" [(ngModel)]="item.name"/>
-                            <label>Price</label>
-                            <input type="text" class="form-control" name="price" [(ngModel)]="item.price"/>
-                            <label>Brand</label>
-                            <input type="text" class="form-control" name="brand" [(ngModel)]="item.brand"/>
-                            <label>Description</label>
-                            <input type="text" class="form-control" name="description" [(ngModel)]="item.description"/>
-                            <label>Expiration</label>
-                            <datepicker [(ngModel)]="expiration" name="expiration"></datepicker>                        
-                            <label>Category</label>
-                            <input type="text" class="form-control" name="category"/>
-                        </div>
-                        <button class="btn btn-primary" (click)="addItem()">Save</button>
-                    </form>
-                </div>
-                <div class="col-md-4">
-                    <form>
-                        <div class="form-group">
-                            <label>Images</label>
-                            <upload-multiple (onChunkLoaded)="onChunkLoaded($event)"></upload-multiple>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </template>
-    </ngb-tab>
+<ngb-tabset type="pills" #myTabSet="ngbTabset" [destroyOnHide]="false">
+   
     <ngb-tab title="Items uploaded">
         <template ngbTabContent>
             <div class="col-md-6">
@@ -77,6 +45,39 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </template>
+    </ngb-tab>
+     <ngb-tab title="New items">
+        <template ngbTabContent>
+            <div class="row">
+                <div class="col-md-4">
+                    <form role="form">
+                        <div class="form-group">                            
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="Name" [(ngModel)]="item.name"/>
+                            <label>Price</label>
+                            <input type="text" class="form-control" name="price" [(ngModel)]="item.price"/>
+                            <label>Brand</label>
+                            <input type="text" class="form-control" name="brand" [(ngModel)]="item.brand"/>
+                            <label>Description</label>
+                            <input type="text" class="form-control" name="description" [(ngModel)]="item.description"/>
+                            <label>Expiration</label>
+                            <datepicker [(ngModel)]="expiration" name="expiration"></datepicker>                        
+                            <label>Category</label>
+                            <input type="text" class="form-control" name="category"/>
+                        </div>
+                        <button class="btn btn-primary" (click)="addItem()">Save</button>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <form>
+                        <div class="form-group">
+                            <label>Images</label>
+                            <upload-multiple (onChunkLoaded)="onChunkLoaded($event)"></upload-multiple>
+                        </div>
+                    </form>
+                </div>
             </div>
         </template>
     </ngb-tab>

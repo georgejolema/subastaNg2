@@ -11,6 +11,12 @@ export class Item{
     constructor(){
         this.images=[];
         this.category=[];
+        this.name="";
+        this.description="";
+        this.price=0;
+        this.expiration={day:1,month:1,year:2001};
+        this.brand="";
+        this.status=0;
     }
 }
 

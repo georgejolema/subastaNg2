@@ -102,7 +102,7 @@ gulp.task('webpack', function() {
                     name: ['base.app', 'app.vendor']
                     })
         ]
-    }))
+    }, require('webpack')))
     .pipe(gulp.dest(path.app+'/dist'));
 });
 gulp.task('compress', function () {
