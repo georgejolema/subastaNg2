@@ -9,23 +9,32 @@ import {NotificationService} from '../../services/notification.service';
     templateUrl:'business/items/Items.html'
 })
 export class ItemsComponent implements OnInit{
+    wizardElement:wizardViewModel;
+    item:Item;
     constructor(private apiAccount:AccountService, 
                 private apiItem:ItemService,
                 private notification:NotificationService){}   
-    item:Item;
+   
     ngOnInit(){
+        this.wizardElement=new wizardViewModel();
         if(this.apiAccount.validateUser()){
             this.item=new Item();
         }
     }
     onChunkLoaded(blob: IBlob){
-
     }
 
-    addItem(){
+    next(){
+         this.wizardElement.setNextPosition();
+    }
+    back(){
+        this.wizardElement.setBackPosition();
+    }
+
+    submit(){
         if(this.validateFields())
             this.apiItem.Insert(this.item).then(x=>console.log(x));
-    }
+    }    
     
     private validateFields(){
         if(this.item.name==""){
@@ -55,4 +64,36 @@ export class ItemsComponent implements OnInit{
         return true;
     }
 
+}
+
+class wizardViewModel{
+    wizardPosition:number;
+    wizardItems:String[];
+    constructor(){
+        this.wizardPosition=0;
+        this.wizardItems=["General forms", "Images"];
+    }
+    setPosition(value:number){
+        this.wizardPosition=value;
+    }
+
+    setNextPosition(){
+        if(!this.isLastPosition())
+            this.wizardPosition++;
+    }
+
+    setBackPosition(){
+        if(!this.isFirstPosition())
+            this.wizardPosition--;
+    }
+
+    isLastPosition():Boolean{
+        return this.wizardPosition==this.wizardItems.length-1;
+    }
+
+    isFirstPosition():Boolean{
+        return this.wizardPosition==0;
+    }
+
+    
 }

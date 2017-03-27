@@ -48,11 +48,17 @@
             </div>
         </template>
     </ngb-tab>
-     <ngb-tab title="New items">
+     <ngb-tab title="New item">
         <template ngbTabContent>
+            <h4>New item wizard</h4>
             <div class="row">
-                <div class="col-md-4">
-                    <form role="form">
+                <div class="col-md-2">
+                    <nav class="nav flex-column">
+                        <a *ngFor="let tab of wizardElement.wizardItems; let i = index" class="nav-link"  href role="tab" (click)="wizardElement.setPosition(i);false">{{tab}}</a>                                                                
+                    </nav>
+                </div>
+                <div class="col-md-8" [hidden]="wizardElement.wizardPosition!=0">
+                     <form role="form">
                         <div class="form-group">                            
                             <label>Name</label>
                             <input type="text" class="form-control" name="Name" [(ngModel)]="item.name"/>
@@ -67,18 +73,27 @@
                             <label>Category</label>
                             <input type="text" class="form-control" name="category"/>
                         </div>
-                        <button class="btn btn-primary" (click)="addItem()">Save</button>
+                        
                     </form>
                 </div>
-                <div class="col-md-4">
-                    <form>
+                <div class="col-md-8" [hidden]="wizardElement.wizardPosition!=1">
+                      <form>
                         <div class="form-group">
                             <label>Images</label>
                             <upload-multiple (onChunkLoaded)="onChunkLoaded($event)"></upload-multiple>
                         </div>
                     </form>
                 </div>
+                
             </div>
+            <div class="row">
+                <div class="offset-md-4 col-md-4">
+                    <button class="btn btn-primary" [disabled]="wizardElement.isFirstPosition()" (click)="back()">back</button>
+                    <button class="btn btn-primary" *ngIf="!wizardElement.isLastPosition()" (click)="next()">Next</button>
+                    <button class="btn btn-primary" *ngIf="wizardElement.isLastPosition()" (click)="submit()">Finish</button>
+                </div>
+            </div>
+            
         </template>
     </ngb-tab>
 </ngb-tabset>
