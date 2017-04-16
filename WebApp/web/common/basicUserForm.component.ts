@@ -1,6 +1,6 @@
 import { Component, Input , Output, EventEmitter, OnInit} from '@angular/core';
 import {IDatepickerData} from  '../entities/IDatepickerData';
-import {User} from '../entities/user';
+import {User} from '../entities/User';
 const now = new Date();
 @Component({
   selector: 'basic-user-form',

@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from '../business/home/home.component'
 import {RegisterComponent} from '../business/register/register.component';
 import {SearchComponent} from '../business/search/search.component';
-import {ItemsComponent} from '../business/items/items.component';
-import {CartComponent} from '../business/cart/cart.component';
+import {ItemsComponent} from '../business/items/Items.component';
+import {CartComponent} from '../business/cart/Cart.component';
 import {ProfileComponent} from '../business/profile/profile.component';
 
 const appRoutes: Routes = [

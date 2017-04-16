@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import{UserService} from '../../services/user.service';
-import{User} from '../../entities/user';
+import{User} from '../../entities/User';
 
 @Component({
   selector: 'home',
