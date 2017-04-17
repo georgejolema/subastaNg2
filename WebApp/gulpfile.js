@@ -16,7 +16,7 @@ var gulp = require('gulp'),
     path={
         app:'tmp/',
         source:'web/',
-        finalApp:'../Server/dist/'
+        finalApp:'../WebServer/dist/'
     };
 
 
@@ -57,8 +57,8 @@ gulp.task('transpile', function ()
 });
 gulp.task('inject', function(){
     var options = {
-        bowerJson: require('../Server/bower.json'),
-        directory: '../Server/bower_components',
+        bowerJson: require('../WebServer/bower.json'),
+        directory: '../WebServer/bower_components',
         ignorePath: '../bower_components'
     };
     var injectSrc = gulp.src([path.finalApp+'*.css',
@@ -68,7 +68,7 @@ gulp.task('inject', function(){
 	
     return gulp.src(path.finalApp+'index.html')
         .pipe(wiredep(options))
-        .pipe(inject(injectSrc, {ignorePath: '../Server/dist/'}))
+        .pipe(inject(injectSrc, {ignorePath: '../WebServer/dist/'}))
         .pipe(gulp.dest(path.finalApp));
 });
 gulp.task('removeTemplates', function () {

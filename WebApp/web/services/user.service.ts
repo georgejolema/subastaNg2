@@ -5,10 +5,14 @@ import {User, UserData} from '../entities/User';
 import {BasicService} from './basicService';
 @Injectable()
 export class UserService extends BasicService{
-    private url: string = 'api/user';
+    private apiurl: string = 'api/user';
+    private url:string;
     public user:User;
     public token:string="none";
-    constructor(private http: Http) {super(); }
+    constructor(private http: Http) {
+        super();
+        this.url=this.baseUrl+this.apiurl;
+     }
 
     login(userName:string, password:string):Promise<UserData>{
         return this.post({userName:userName, password:password}, 'login');

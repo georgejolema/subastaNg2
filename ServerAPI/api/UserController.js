@@ -12,10 +12,12 @@ userRouter.route('/login').post(passport.authenticate('local'), login);
 userRouter.route('/logout').get(logout);
 userRouter.route('/profile')
     .all(function (req, res, next) {
+        console.log(req.user);
         if (!req.user) {
-            res.send('Invalid user');
+            res.status(417).send('Invalid user');
         }
-        next();
+        else
+            next();
     }).get(profile);
 userRouter.route('/register').post(register);
 userRouter.route('/update').post(isAuthenticated(), update);
@@ -25,7 +27,7 @@ userRouter.route('/validatepassword').post(isAuthenticated(), validatePassWord);
 function isAuthenticated(){
     return passport.authenticate('bearer', { session: false });
 }
-function login(req, res){	
+function login(req, res){
     res.redirect('/api/user/profile');
 }
 function logout(req, res){

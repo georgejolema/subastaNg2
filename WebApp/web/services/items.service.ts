@@ -20,7 +20,7 @@ export class ItemService extends BasicService{
             'Authorization': 'Bearer ' + this.apiUser.token
         });
         return this.http
-            .post('api/item/newitem', JSON.stringify(item), { headers: headers })
+            .post(this.baseUrl+'api/item/newitem', JSON.stringify(item), { headers: headers })
             .toPromise()
             .then(res => res.json())
             .catch(this.handleError);

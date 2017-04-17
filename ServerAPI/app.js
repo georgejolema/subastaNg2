@@ -8,14 +8,17 @@ var express = require('express'),
     passport = require('passport'),
     session = require('express-session'),
     mongoose = require('mongoose'),
+     cors = require('cors'),
     PORT = process.env.PORT || 5000;
 mongoose.connect('mongodb://localhost:27017/subasta');
 /*Middleware------------------------------------------ */
 
-app.use(express.static('node_modules'));
-app.use(express.static('dist'));
-app.use(express.static('bower_components'));
-app.use('/business',express.static('dist/business'));
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
+    next();
+});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
@@ -29,8 +32,8 @@ app.use('/api/user', userRouter);
 app.use('/api/item', itemRouter);
 /*footer---------------------------------------------------- */
 
-app.get('*', function(req, res) {
-  res.sendFile('dist/index.html', { root: __dirname });
+app.get('/', function(req, res) {
+  res.send("hello world");
 });
 
 app.listen(PORT, function () {
