@@ -8,16 +8,22 @@ var express = require('express'),
     passport = require('passport'),
     session = require('express-session'),
     mongoose = require('mongoose'),
-     cors = require('cors'),
     PORT = process.env.PORT || 5000;
 mongoose.connect('mongodb://localhost:27017/subasta');
 /*Middleware------------------------------------------ */
 
 
+
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Content-Type");
-    next();
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization');
+  if ('OPTIONS' == req.method) {
+      res.send(200);
+  } else {
+      next();
+  }
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());

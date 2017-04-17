@@ -12,7 +12,6 @@ userRouter.route('/login').post(passport.authenticate('local'), login);
 userRouter.route('/logout').get(logout);
 userRouter.route('/profile')
     .all(function (req, res, next) {
-        console.log(req.user);
         if (!req.user) {
             res.status(417).send('Invalid user');
         }

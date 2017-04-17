@@ -61,7 +61,7 @@ export class UserService extends BasicService{
             'Content-Type': 'application/json'
         });
         return this.http
-            .post(this.url + (fnName == '' ? '' : '/' + fnName), JSON.stringify(data), { headers: headers })
+            .post(this.url + (fnName == '' ? '' : '/' + fnName), JSON.stringify(data), { headers: headers, withCredentials: true })
             .toPromise()
             .then(res => res.json())
             .catch(this.handleError);
@@ -73,7 +73,7 @@ export class UserService extends BasicService{
             'Authorization': 'Bearer ' + this.token
         });
         return this.http
-            .post(this.url + (fnName == '' ? '' : '/' + fnName), JSON.stringify(data), { headers: headers })
+            .post(this.url + (fnName == '' ? '' : '/' + fnName), JSON.stringify(data), { headers: headers, withCredentials: true  })
             .toPromise()
             .then(res => res.json())
             .catch(this.handleError);
@@ -83,7 +83,7 @@ export class UserService extends BasicService{
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         return this.http
-            .put(this.url + (fnName == '' ? '' : '/' + fnName), JSON.stringify(data), { headers: headers })
+            .put(this.url + (fnName == '' ? '' : '/' + fnName), JSON.stringify(data), { headers: headers, withCredentials: true  })
             .toPromise()
             .then(res => res.json())
             .catch(this.handleError);
