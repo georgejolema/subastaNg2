@@ -9,7 +9,7 @@ var express = require('express'),
     session = require('express-session'),
     mongoose = require('mongoose'),
     PORT = process.env.PORT || 5000;
-mongoose.connect('mongodb://localhost:27017/subasta');
+mongoose.connect('mongodb://172.25.0.101:27017/subasta');
 /*Middleware------------------------------------------ */
 
 

@@ -2,10 +2,16 @@ version: "3"
 
 services:
  website:
-  image: georgejolema/subastang2webapp:latest
+  build:
+   context: ./Web
+   dockerfile: Dockerfile
+  image: georgejolema/subastang2webapp:1
   restart: always
   ports:
    - "8080:8080"
+  networks: 
+   mynet:
+    ipv4_address: 172.25.0.102
 
  db:
   image: 'bitnami/mongodb:latest'
@@ -14,10 +20,26 @@ services:
    - "27017:27017"
   volumes:
    - /usr/local/mongodb:/data/db
+  networks: 
+   mynet:
+    ipv4_address: 172.25.0.101
 
  webapi:
   depends_on:
    - db
-  image: georgejolema/subastang2api:latest
+  build:
+   context: ./ServerAPI
+   dockerfile: Dockerfile
+  image: georgejolema/subastang2api:1
   ports:
    - "3000:3000"
+  networks: 
+   mynet:
+    ipv4_address: 172.25.0.103
+
+networks: 
+ mynet:
+  driver: bridge
+  ipam:
+   config:
+    - subnet: 172.25.0.0/24
