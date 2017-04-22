@@ -1,0 +1,12 @@
+<div>
+        <form role="form" class="register-html"> 
+                <div class="col-md-4"></div>
+                <div class="col-md-5">
+                        <basic-user-form [user]="user" [userNameReadOnly]="userNameReadOnly" (errorHandler)="errorFormHandler($event)"></basic-user-form>
+                        <change-password (errorHandler)="errorFormHandler($event)" [editMode]="editMode"></change-password>   
+                         <div class="form-group">
+                                <button class="btn btn-primary" (click)="register()">Register</button>
+                        </div>             
+                </div>               
+        </form>
+</div>
