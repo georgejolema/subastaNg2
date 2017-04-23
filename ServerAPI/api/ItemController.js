@@ -1,20 +1,21 @@
 var express = require('express'),
     mongoose = require('mongoose'),   
-    userModel = require('../model/item'),
+    itemModel = require('../model/item'),
     passport = require('passport'),
     itemRouter = express.Router();
 
 
-itemRouter.route('/test').get(isAuthenticated(), testMethod);
-
 itemRouter.route('/newitem').post(isAuthenticated(), insertItem);
-function testMethod(req, res){
-    res.send('Hello!');
-}
+
 
 function insertItem(req, res){
-    console.log(req.body);
-    res.json({message:"all good", code:1});
+    var item=req.body.item;
+    var itemData=new itemModel(item);
+    itemData.save(function(err){
+        if(err)res.send(err);
+        else
+           res.json({message:"all good", code:1});
+    });    
 }
 
 function isAuthenticated(){

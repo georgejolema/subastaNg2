@@ -8,6 +8,7 @@ export class Item{
     status:number;
     brand:string;
     images:Array<Image>;
+    user:string;
     constructor(){
         this.images=[];
         this.category=[];
@@ -17,7 +18,9 @@ export class Item{
         this.expiration={day:1,month:1,year:2001};
         this.brand="";
         this.status=0;
+        this.user="";
     }
+   
 }
 
 

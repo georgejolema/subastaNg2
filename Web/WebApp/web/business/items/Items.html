@@ -15,32 +15,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>test1</td>
-                            <td>this is a product</td>
-                            <td>$14.00</td>
-                            <td>Item1</td>
-                            <td>2016/12/01</td>
-                        </tr>
-                            <tr>
-                            <td>test1</td>
-                            <td>this is a product</td>
-                            <td>$14.00</td>
-                            <td>Item1</td>
-                            <td>2016/12/01</td>
-                        </tr>
-                            <tr>
-                            <td>test1</td>
-                            <td>this is a product</td>
-                            <td>$14.00</td>
-                            <td>Item1</td>
-                            <td>2016/12/01</td>
-                        </tr>
-                            <tr>
-                            <td>test1</td>
-                            <td>this is a product</td>
-                            <td>$14.00</td>
-                            <td>Item1</td>
+                        <tr *ngFor="let item of listItems">
+                            <td>{{item.name}}</td>
+                            <td>{{item.description}}</td>
+                            <td>{{item.price}}</td>
+                            <td>{{item.category}}</td>
                             <td>2016/12/01</td>
                         </tr>
                     </tbody>
