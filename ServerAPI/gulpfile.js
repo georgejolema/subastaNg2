@@ -6,7 +6,8 @@ gulp.task('run', function () {
         script: 'app.js',
         delayTime: 1,
         env: {
-            'PORT': 3000
+            'PORT': 3000,
+            'IP':'localhost'
         },
         watch: ['app.js', 'controller/**/*.js', 'api/**/*.js', 'model/**/*.js']
     };

@@ -8,8 +8,9 @@ var express = require('express'),
     passport = require('passport'),
     session = require('express-session'),
     mongoose = require('mongoose'),
-    PORT = process.env.PORT || 5000;
-mongoose.connect('mongodb://172.25.0.101:27017/subasta');
+    PORT = process.env.PORT || 3000,
+    IP = process.env.IP;
+mongoose.connect('mongodb://' + IP + ':27017/subasta');
 /*Middleware------------------------------------------ */
 
 
@@ -26,9 +27,13 @@ app.use(function(req, res, next) {
   }
 });
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(session({secret: 'library'}));
+app.use(session({
+    secret: 'library', 
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -37,10 +42,6 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/item', itemRouter);
 /*footer---------------------------------------------------- */
-
-app.get('/', function(req, res) {
-  res.send("hello world");
-});
 
 app.listen(PORT, function () {
    console.log('server running!... listening port '+PORT); 

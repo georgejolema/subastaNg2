@@ -9,4 +9,4 @@ COPY . /usr/src/app/
 
 RUN npm install
 EXPOSE 3000
-CMD [ "gulp", "run" ]
+CMD [ "node", "app.js" ]
