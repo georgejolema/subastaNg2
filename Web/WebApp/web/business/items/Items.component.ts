@@ -23,19 +23,7 @@ export class ItemsComponent implements OnInit{
         if(this.apiAccount.validateUser()){
             this.item=new Item();
             this.item.user=this.apiUser.user.userName;
-
-            //TODO: replace this by a service call
-            this.listItems=[
-                {
-                    name:"test1",description:"description1",price:20,category:"category1"
-                },
-                {
-                    name:"test2",description:"description2",price:20,category:"category2"
-                },
-                {
-                    name:"test3",description:"description3",price:20,category:"category3"
-                }
-            ]
+            this.refreshList();
         }
     }
     onChunkLoaded(blob: IBlob){
@@ -50,8 +38,18 @@ export class ItemsComponent implements OnInit{
 
     submit(){
         if(this.validateFields())
-            this.apiItem.Insert(this.item).then(x=>console.log(x));
-    }    
+            this.apiItem.Insert(this.item).then(function(x){
+                this.refreshList();
+            });
+    }   
+
+    private refreshList(){
+        this.apiItem.GetItems(this.item.user, this.apiUser.token).then(x=>this.setListValues(x));
+    }
+
+    private setListValues(items:Array<Item>){
+        this.listItems=items;
+    } 
     
     private validateFields(){
         if(this.item.name==""){
@@ -62,10 +60,10 @@ export class ItemsComponent implements OnInit{
             this.notification.errorMessage("The description is required to add a new item");
             return false;
         }
-        if(this.item.category.length==0){
+       /* if(this.item.category.length==0){
             this.notification.errorMessage("There must be at least one category to add a new item");
             return false;
-        }
+        }*/
         if(this.item.price==0){
             this.notification.errorMessage("The price is required to add a new item");
             return false;
@@ -74,10 +72,10 @@ export class ItemsComponent implements OnInit{
             this.notification.errorMessage("The brand is required to add a new item");
             return false;
         }
-        if(this.item.images.length){
+       /* if(this.item.images.length){
             this.notification.errorMessage("There must be at least one image configured for the new item");
             return false;
-        }
+        }*/
         return true;
     }
 
